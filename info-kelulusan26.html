@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman Kelulusan - SMKS Kristen Tomosa 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --primary-light: #2c5282;
+            --accent: #c9a227;
+            --accent-light: #ecc94b;
+            --success: #276749;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #2d3748;
+            --text-light: #718096;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(30, 58, 95, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .header .year {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 20px;
+            background: var(--accent);
+            color: var(--primary);
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.95em;
+        }
+
+        /* Card */
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+            font-size: 0.95em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 58, 95, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success) 0%, #2f855a 100%);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(39, 103, 73, 0.3);
+        }
+
+        /* Result */
+        .result-section {
+            display: none;
+            text-align: center;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--success) 0%, #2f855a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            box-shadow: 0 8px 25px rgba(39, 103, 73, 0.3);
+        }
+
+        .result-icon svg {
+            width: 45px;
+            height: 45px;
+            stroke: white;
+        }
+
+        .result-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+
+        .result-message {
+            font-size: 1.2em;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .student-info {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #9ae6b4;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .student-info .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #cbd5e0;
+        }
+
+        .student-info .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .student-info .info-label {
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .student-info .info-value {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .student-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6em;
+            color: var(--primary);
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
+        }
+
+        /* Error */
+        .error-message {
+            display: none;
+            background: #fed7d7;
+            color: #c53030;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Print Section */
+        .print-section {
+            display: none;
+            margin-top: 30px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+            .card {
+                box-shadow: none;
+                border: none;
+            }
+            .header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .berita-acara {
+                page-break-before: always;
+                margin-top: 0;
+                padding-top: 40px;
+            }
+        }
+
+        .print-only {
+            display: none;
+        }
+
+        /* Berita Acara */
+        .berita-acara {
+            border: 3px double var(--primary);
+            padding: 50px;
+            margin-top: 30px;
+            background: white;
+            position: relative;
+        }
+
+        .berita-acara::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--primary-light);
+            pointer-events: none;
+        }
+
+        .berita-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+        }
+
+        .berita-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .berita-header .sekolah {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+
+        .berita-header .tahun {
+            font-size: 1em;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .berita-content {
+            text-align: justify;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        .berita-content p {
+            margin-bottom: 15px;
+        }
+
+        .berita-data {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f7fafc;
+            border-left: 4px solid var(--primary);
+        }
+
+        .berita-data table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .berita-data td {
+            padding: 8px 0;
+            vertical-align: top;
+        }
+
+        .berita-data td:first-child {
+            width: 150px;
+            font-weight: 500;
+        }
+
+        .berita-data td:nth-child(2) {
+            width: 20px;
+        }
+
+        .ttd-section {
+            margin-top: 60px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .ttd-box {
+            text-align: center;
+            width: 300px;
+        }
+
+        .ttd-box .tempat-tanggal {
+            margin-bottom: 80px;
+        }
+
+        .ttd-box .nama {
+            font-weight: 700;
+            font-size: 1.1em;
+            border-bottom: 1px solid var(--text);
+            padding-bottom: 2px;
+            display: inline-block;
+        }
+
+        .ttd-box .jabatan {
+            margin-top: 5px;
+            font-size: 0.95em;
+            color: var(--text-light);
+        }
+
+        .stempel-area {
+            position: absolute;
+            bottom: 120px;
+            right: 80px;
+            width: 120px;
+            height: 120px;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 0.75em;
+            text-align: center;
+            opacity: 0.6;
+            transform: rotate(-15deg);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6em;
+            }
+            .card {
+                padding: 25px;
+            }
+            .berita-acara {
+                padding: 25px;
+            }
+            .ttd-section {
+                justify-content: center;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Pengumuman Kelulusan</h1>
+            <div class="subtitle">SMKS Kristen Tomosa 2</div>
+            <div class="year">Tahun Pelajaran 2025/2026</div>
+        </div>
+
+        <!-- Form Section -->
+        <div id="formSection" class="card no-print">
+            <h2 style="text-align: center; margin-bottom: 10px; color: var(--primary);">Cek Kelulusan</h2>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 30px;">
+                Silakan masukkan NISN dan Tanggal Lahir Anda
+            </p>
+
+            <div id="errorMessage" class="error-message">
+                Data tidak ditemukan. Pastikan NISN dan Tanggal Lahir sudah benar.
+            </div>
+
+            <form id="cekForm" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="nisn">Nomor Induk Siswa Nasional (NISN)</label>
+                    <input type="text" id="nisn" placeholder="Masukkan 10 digit NISN" maxlength="10" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="tglLahir">Tanggal Lahir</label>
+                    <input type="date" id="tglLahir">
+                </div>
+
+                <button type="button" class="btn" onclick="cekKelulusan()">
+                    Cek Kelulusan
+                </button>
+            </form>
+        </div>
+
+        <!-- Result Section -->
+        <div id="resultSection" class="card result-section">
+            <div class="result-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+
+            <div class="result-title">Selamat Anda Lulus!</div>
+            <div class="result-message">
+                Dengan bangga kami sampaikan bahwa Anda dinyatakan:<br>
+                <strong>LULUS</strong> dari SMKS Kristen Tomosa 2
+            </div>
+
+            <div class="student-name" id="displayNama"></div>
+
+            <div class="student-info">
+                <div class="info-row">
+                    <span class="info-label">Nama Lengkap</span>
+                    <span class="info-value" id="infoNama"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">NISN</span>
+                    <span class="info-value" id="infoNisn"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Tanggal Lahir</span>
+                    <span class="info-value" id="infoTglLahir"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Sekolah</span>
+                    <span class="info-value">SMKS Kristen Tomosa 2</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Tahun Lulus</span>
+                    <span class="info-value">2026</span>
+                </div>
+            </div>
+
+            <div class="no-print" style="margin-top: 30px;">
+                <button class="btn btn-success" onclick="tampilkanBeritaAcara()">
+                    Cetak Berita Acara Kelulusan
+                </button>
+                <button class="btn" style="margin-top: 15px; background: #718096;" onclick="resetForm()">
+                    Kembali ke Halaman Awal
+                </button>
+            </div>
+        </div>
+
+        <!-- Berita Acara (Print Only) -->
+        <div id="beritaAcara" class="berita-acara print-only">
+            <div class="stempel-area">
+                SMKS KRISTEN<br>TOMOSA 2
+            </div>
+
+            <div class="berita-header">
+                <h2>Berita Acara Kelulusan</h2>
+                <div class="sekolah">SMKS Kristen Tomosa 2</div>
+                <div class="tahun">Tahun Pelajaran 2025/2026</div>
+            </div>
+
+            <div class="berita-content">
+                <p>Yang bertanda tangan di bawah ini, Kepala SMKS Kristen Tomosa 2, menerangkan bahwa:</p>
+
+                <div class="berita-data">
+                    <table>
+                        <tr>
+                            <td>Nama Lengkap</td>
+                            <td>:</td>
+                            <td id="baNama"></td>
+                        </tr>
+                        <tr>
+                            <td>NISN</td>
+                            <td>:</td>
+                            <td id="baNisn"></td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Lahir</td>
+                            <td>:</td>
+                            <td id="baTglLahir"></td>
+                        </tr>
+                        <tr>
+                            <td>Sekolah</td>
+                            <td>:</td>
+                            <td>SMKS Kristen Tomosa 2</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>Telah menyelesaikan seluruh program pembelajaran dan ujian sesuai dengan kurikulum yang berlaku, serta dinyatakan <strong>LULUS</strong> dari SMKS Kristen Tomosa 2 pada tahun pelajaran 2025/2026.</p>
+
+                <p>Demikian berita acara ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+            </div>
+
+            <div class="ttd-section">
+                <div class="ttd-box">
+                    <div class="tempat-tanggal">
+                        Tomosa, ........................ 2026
+                    </div>
+                    <div style="margin-bottom: 10px; font-weight: 500;">Kepala Sekolah,</div>
+                    <div class="nama">Hasrat W. Gea, S.Kom., M.M</div>
+                    <div class="jabatan">NIP. -</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer no-print">
+            © SMKS Kristen Tomosa 2 - Sistem Informasi Kelulusan
+        </div>
+    </div>
+
+    <script>
+        // Data Siswa Lulus
+        const dataSiswa = [
+            { nisn: "0071122239", tglLahir: "27/05/2007", nama: "ACOH LAOLI" },
+            { nisn: "0057628323", tglLahir: "05/11/2005", nama: "ARISMAN NDRAHA" },
+            { nisn: "0071126610", tglLahir: "16/04/2007", nama: "BENEDIKTUS PARELEN SETIAMAN GULO" },
+            { nisn: "0052648496", tglLahir: "09/01/2005", nama: "DEDI SAPUTRA HALAWA" },
+            { nisn: "0078400445", tglLahir: "27/09/2007", nama: "DHIMAS KRISTIAN BATE'E" },
+            { nisn: "0079957197", tglLahir: "21/12/2007", nama: "DOMINIKUS SYUKUR PUTRA HALAWA" },
+            { nisn: "0088405683", tglLahir: "30/03/2008", nama: "GUIDO RICKY PASTIAN ZEBUA" },
+            { nisn: "0074323821", tglLahir: "18/02/2007", nama: "IDA PUTRI WARUWU" },
+            { nisn: "0073711554", tglLahir: "04/10/2007", nama: "IRWAN PERLINDUNGAN GULO" },
+            { nisn: "0076020608", tglLahir: "27/06/2007", nama: "JAMES SUKARIAMAN LAWOLO" },
+            { nisn: "0082549919", tglLahir: "12/06/2008", nama: "JUNI YALI ZAI" },
+            { nisn: "0074847278", tglLahir: "04/12/2007", nama: "LELLY MERRY PERTIWI BATE'E" },
+            { nisn: "0067536231", tglLahir: "13/07/2008", nama: "LINDUNI LAOLI" },
+            { nisn: "0085694772", tglLahir: "26/01/2008", nama: "MASTETI ZEBUA" },
+            { nisn: "0046508678", tglLahir: "29/05/2006", nama: "MEIWAN GEA" },
+            { nisn: "0066018081", tglLahir: "20/12/2006", nama: "NIASTATI ZAMASI" },
+            { nisn: "0077672399", tglLahir: "20/04/2007", nama: "PETRUS FIRMAN JAYA GULO" },
+            { nisn: "0041169252", tglLahir: "02/10/2004", nama: "RAHMAT JAYA BATE'E" },
+            { nisn: "0073065567", tglLahir: "16/08/2007", nama: "RAYMOND PUTRA NAZARA" },
+            { nisn: "0083281458", tglLahir: "03/11/2008", nama: "SERIKAT NOVAN SYAHPUTRA ZEBUA" },
+            { nisn: "0076819938", tglLahir: "18/09/2007", nama: "SETIAMAN LAOLI" },
+            { nisn: "0082437280", tglLahir: "26/09/2008", nama: "TRIANUS BATE'E" },
+            { nisn: "0076321547", tglLahir: "30/09/2007", nama: "ANGELINA SEPTIAWATI ZEBUA" },
+            { nisn: "0073080513", tglLahir: "16/04/2007", nama: "BERNADET ENJEL PUTRI GULO" },
+            { nisn: "0086381521", tglLahir: "02/10/2008", nama: "BERNAT LAOLI" },
+            { nisn: "0071549474", tglLahir: "29/12/2007", nama: "DELFIN GEA" },
+            { nisn: "0088652314", tglLahir: "18/09/2008", nama: "EJERNI BATE'E" },
+            { nisn: "0087719515", tglLahir: "30/08/2008", nama: "ERFIN CITRA BATE'E" },
+            { nisn: "0061104423", tglLahir: "01/12/2007", nama: "IMAN SYUKUR JAYA GULO" },
+            { nisn: "0084930229", tglLahir: "04/11/2008", nama: "KARLIUS FARASI" },
+            { nisn: "0075884375", tglLahir: "05/01/2007", nama: "KISYAH NDRAHA" },
+            { nisn: "0081198762", tglLahir: "29/06/2008", nama: "LEONARD DONISIUS GEA" },
+            { nisn: "0037626150", tglLahir: "23/01/2010", nama: "LOLA FRANS SISKA BATE'E" },
+            { nisn: "0062659530", tglLahir: "04/05/2007", nama: "MEI PUTRA NDRAHA" },
+            { nisn: "0081765899", tglLahir: "12/05/2007", nama: "MEI RISMAN LAOLI" },
+            { nisn: "0079896467", tglLahir: "23/06/2007", nama: "NETA ROS JELITA BATE'E" },
+            { nisn: "0086759761", tglLahir: "02/06/2008", nama: "NINGSI NUR CAHYA GEA" },
+            { nisn: "0082358712", tglLahir: "11/12/2008", nama: "NONA CITRA PUSPITA BATEE" },
+            { nisn: "0054240957", tglLahir: "14/11/2005", nama: "NOVI YANTI WARUWU" },
+            { nisn: "0087569448", tglLahir: "02/02/2007", nama: "NURMA PUTRI DE NIAS BATEE" },
+            { nisn: "0052968950", tglLahir: "01/10/2005", nama: "ONI CAHAYA GULO" },
+            { nisn: "0069400674", tglLahir: "12/04/2006", nama: "RESTU IMAN KASIH BATE'E" },
+            { nisn: "0088192525", tglLahir: "02/01/2008", nama: "RIANG SEJAHTERA ZAI" },
+            { nisn: "0081158728", tglLahir: "03/08/2008", nama: "STEFANUS AGUS KELFIN ZEBUA" },
+            { nisn: "0088532683", tglLahir: "08/03/2008", nama: "SUSI LESTARI LAOLI" }
+        ];
+
+        let currentStudent = null;
+
+        function formatTanggal(tgl) {
+            const bulan = [
+                "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            ];
+            const [d, m, y] = tgl.split('/');
+            return `${parseInt(d)} ${bulan[parseInt(m)-1]} ${y}`;
+        }
+
+        function formatTanggalFromInput(dateStr) {
+            const d = new Date(dateStr);
+            const dd = String(d.getDate()).padStart(2, '0');
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const yyyy = d.getFullYear();
+            return `${dd}/${mm}/${yyyy}`;
+        }
+
+        function cekKelulusan() {
+            const nisnInput = document.getElementById('nisn').value.trim();
+            const tglInput = document.getElementById('tglLahir').value;
+            const errorDiv = document.getElementById('errorMessage');
+
+            if (!nisnInput || !tglInput) {
+                errorDiv.textContent = "Harap isi NISN dan Tanggal Lahir terlebih dahulu.";
+                errorDiv.style.display = "block";
+                return;
+            }
+
+            const tglFormatted = formatTanggalFromInput(tglInput);
+
+            const siswa = dataSiswa.find(s => 
+                s.nisn === nisnInput && s.tglLahir === tglFormatted
+            );
+
+            if (siswa) {
+                currentStudent = siswa;
+                errorDiv.style.display = "none";
+
+                // Tampilkan hasil
+                document.getElementById('displayNama').textContent = siswa.nama;
+                document.getElementById('infoNama').textContent = siswa.nama;
+                document.getElementById('infoNisn').textContent = siswa.nisn;
+                document.getElementById('infoTglLahir').textContent = formatTanggal(siswa.tglLahir);
+
+                // Isi berita acara
+                document.getElementById('baNama').textContent = siswa.nama;
+                document.getElementById('baNisn').textContent = siswa.nisn;
+                document.getElementById('baTglLahir').textContent = formatTanggal(siswa.tglLahir);
+
+                document.getElementById('formSection').style.display = "none";
+                document.getElementById('resultSection').style.display = "block";
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                errorDiv.textContent = "Data tidak ditemukan. Pastikan NISN dan Tanggal Lahir sudah benar.";
+                errorDiv.style.display = "block";
+            }
+        }
+
+        function tampilkanBeritaAcara() {
+            if (!currentStudent) return;
+
+            const ba = document.getElementById('beritaAcara');
+            ba.style.display = "block";
+            ba.classList.remove('print-only');
+
+            // Scroll ke berita acara
+            ba.scrollIntoView({ behavior: 'smooth' });
+
+            // Tambahkan tombol print
+            setTimeout(() => {
+                window.print();
+            }, 500);
+        }
+
+        function resetForm() {
+            document.getElementById('nisn').value = "";
+            document.getElementById('tglLahir').value = "";
+            document.getElementById('errorMessage').style.display = "none";
+            document.getElementById('formSection').style.display = "block";
+            document.getElementById('resultSection').style.display = "none";
+            document.getElementById('beritaAcara').style.display = "none";
+            document.getElementById('beritaAcara').classList.add('print-only');
+            currentStudent = null;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Enter key support
+        document.getElementById('nisn').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') cekKelulusan();
+        });
+        document.getElementById('tglLahir').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') cekKelulusan();
+        });
+    </script>
+</body>
+</html>
